@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>example pubsub with redis sentinels</title>
+  </head>
+  <body>
+
+    <form action="">
+      <input id="m" autocomplete="off" />
+      <button>send message</button>
+    </form>
+
+    <ul id="messages"></ul>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io('');
+
+      $('form').submit(function(){
+        socket.emit('message', $('#m').val());
+        $('#messages').append($('<li>').text("> " + $('#m').val()));
+        $('#m').val('');
+        return false;
+      });
+
+      socket.on('message', function(msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+    </script>
+  </body>
+</html>

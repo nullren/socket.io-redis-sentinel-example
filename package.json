@@ -1,0 +1,9 @@
+{
+  "name": "socket.io-redis-sentinel-example",
+  "version": "0.0.1",
+  "description": "testing sentinel redis support in socket.io",
+  "dependencies": {
+    "express": "^4.12.3",
+    "socket.io": "^1.3.5"
+  }
+}
