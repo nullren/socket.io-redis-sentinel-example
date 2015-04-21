@@ -16,8 +16,8 @@ var SENTINELS = [
     {host: '127.0.0.1', port: 23462}
   ];
 
-var pub = redis(SENTINELS, 'mymaster', { detect_buffers: true })
-var sub = redis(SENTINELS, 'mymaster', { detect_buffers: true })
+var pub = redis(SENTINELS, 'mymaster', { role: 'master' })
+var sub = redis(SENTINELS, 'mymaster', { role: 'slave', detect_buffers: true })
 
 io.adapter(ra({ pubClient: pub, subClient: sub }));
 
