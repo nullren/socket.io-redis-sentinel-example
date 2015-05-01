@@ -16,17 +16,19 @@ var SENTINELS = [
     {host: '127.0.0.1', port: 23462}
   ];
 
-var pub = redis(SENTINELS, 'mymaster', { role: 'master' })
-var sub = redis(SENTINELS, 'mymaster', { role: 'slave', detect_buffers: true })
+var pub = redis(SENTINELS, 'mymaster')
+var sub = redis(SENTINELS, 'mymaster', { detect_buffers: true })
 
 io.adapter(ra({ pubClient: pub, subClient: sub }));
 
 io.on('connection', function(socket) {
   console.log(socket.id);
 
+  socket.join("taco")
+
   socket.on('message', function(m) {
     console.log('emitting', socket.id, m);
-    socket.broadcast.emit('message', m);
+    socket.to("taco").emit('message', m);
   });
 });
 
